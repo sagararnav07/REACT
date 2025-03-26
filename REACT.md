@@ -163,3 +163,88 @@ ref = {passwordRef}// using "useRef()" to give a reference to the copy component
 
 
 
+
+  **12. React router Crash course 07-reactRouter**
+  
+   1. Read *Router-Dom.md*
+   2. We create a header and a footer in components and the new thing is link and navlink - why we use link and don't use <a>
+     tag is because <a> tag completely refresh the page which is not a good concept for react.
+
+   3. Why we have written *className* in a callback function so that we can manipulate the classes
+   4. 🔹 What is <NavLink>?
+        <NavLink> is a specialized version of <Link> in React Router that provides an active state when the link matches the current URL. This is useful for highlighting navigation items (e.g., in a navbar).
+   5. We can manipulate the classes using *isActive* by inserting a variable  ${isActive ? "text-orange-700" : "text-gray-700"}
+       <nav>
+      <NavLink 
+        to="/" 
+        className={({ isActive }) => isActive ? "active-link" : "nav-link"}
+      >
+        Home
+      </NavLink>
+       The className prop is passed a function {({ isActive }) => ...}.
+       If isActive is true, the link gets the active-link class. Otherwise, it gets the nav-link class.
+
+    6. Created more components like Header, Foorter, Home
+    7. How to navigate thorough react router is we done need app.jsx, We go in main.jsx and delete <App />
+       As we are going to use react router to navigate
+       .We create a method called  *const router = createBrowserRouter([])* and we take an array in this method to store all the objects we need
+
+   8. We create a file in src called "Layout.jsx" what it does it stores all the components so that we don't have to manipulate in each one one and we use a method from react router called *Outlet* : The main function of outlet is to make changes where 
+
+   In React, especially when using React Router, the <Outlet /> component is used to render child routes within a parent route. It acts as a placeholder for the nested route components.
+
+Usage of <Outlet /> in React Router
+When you define a parent route with nested child routes, <Outlet /> is placed in the parent component where the child components should be rendered.
+
+How <Outlet /> Works?
+When navigating to /, <Home /> will be rendered inside <Outlet />.
+
+When navigating to /about, <About /> will be rendered inside <Outlet />.
+ 
+When navigating to /contact, <Contact /> will be rendered inside <Outlet />.
+
+NOTE: <Outlet /> ka simple meaning ye hai ki isko header aur footer ke beech me daal dene se header or footer chnage hong ye nhi hoga change
+
+ 9. in  main.jsx we do is give a router where does the routes coming from <RouterProvider router={router} /> 
+ 10. In main.jsx we provide different routes for different components using react router inbuilt methods like createBrowserRouter([]) //where  we are passing array of all componet's path and element name
+
+ 11. We run the application debug it  and then we used *to* keyword in Header.jsx to give <Navlink to = "/">  path that where should the component should take you
+
+ 12. We added the path of About in main.jsx then *About becomes active*
+ 13. Learn how to access a component's id, for i.e Created a *User.jsx* component and then passed it a userid then
+     passed it as a path in main.jsx her we use a react-router feature called **useParams**
+
+ ### How useParams Works
+     useParams is a hook provided by React Router that allows you to access URL parameters inside a React component. It is commonly used when dealing with dynamic routes, such as fetching specific user details, blog posts, or product pages.When a route contains dynamic segments (e.g., /user/:id), useParams extracts these parameters as an object.
+     When to Use useParams
+✅ Use useParams when you need to extract values from the URL dynamically, such as:
+
+Fetching user, product, or blog details from an API
+Implementing pagination (/products/page/2)
+Navigating based on category (/shop/category/electronics)
+
+❌ Avoid using useParams when:
+
+You don’t need dynamic routing (use state instead).
+You have a small, static set of pages (hardcode routes).
+
+14. Create a new component *Github.jsx* in Github then add it's route in *main.jsx* then Added it in *Header.jsx*
+15. How would we see github followers when we do an API call using *fetch()* and when do we need to do api calls? when we 
+   mount the github component
+16. create a promise in  useEffect() method that calls the Api whenever the componenet is mounted and a useState([data,setData]) method that can set the the state variable for the component and updates the followers
+17. we know that in github there is an key value pair of {followrers: 2} we use that {data.followers}  and we start getting followers
+18. We create 
+A loader in React.js is typically used to indicate that some asynchronous operation (like data fetching or processing) is in progress. Here are some common ways to implement a loader in React:
+
+### React route loader
+/*In React.js, route loaders are primarily used in React Router (v6.4 and later) to fetch data before rendering a route. This is useful for preloading data for a page, 
+                                                      improving performance, and ensuring that the required data is available when a route is loaded.
+                                                      1  . What is a Route Loader?
+                                                      A loader is a function that runs before a route is rendered and returns data to be used in the component.
+                                                      2. How to Use Loaders in React Router?You can define a loader function and pass it to a route using loader inside createBrowserRouter.*/
+
+    
+
+19. We crreated a path route for the method in the main.jsx file and we are done
+
+### Most important thing: Everything we have done in main.jsx to provide routes is only possible because we have made a file called Layout.jsx in src, because of that we have imported "Outlet" from react-router due to which we were able to create routes in main.jsx and that outlet helped us make layout of the page and in that format we passed the route first the layout then home the other componemts. Everything you pass as a route should be in order of the DOM. FOr eg if you have localhos:3000/About/Arnav, so the route will be passed in the same order 
