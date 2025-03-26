@@ -20,6 +20,7 @@ function Github() {
   )
 }
 
+//alternate method from above
 export default Github
 
 export const githubInfoLoader = async() => {
