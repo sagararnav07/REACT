@@ -71,7 +71,7 @@
       **09. Building a react Project| bgChanger  04-bgChanger**
 
    1. We create a project where we can select the color to chnage the color in the ui
-   2. We create a project but why we use <div className = ""> instead of <div class = ""> ? it's because  className id a reserved keyword in React to name classes
+   2. We create a project but why we use <div className = ""> instead of <div class = ""> ? it's because  class is a reserved keyword in React to name classes
    3. We create a classname that sets the bottons location and then we create buttons of different colors 
    4. *IMPORTANT* For changing the color of the entire page we can use *onClick()* method but we should not just pass the reference in
       *onClick()* like this *<button onClick = {setcolor("red")}></button>* what we should do is *onClick()* expects a function not a reference and if you just give a reference it will not be able to give you parameters so use a *Call Back Function* like this
