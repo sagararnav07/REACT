@@ -1,6 +1,6 @@
 //STEP 2
 
-import {createSlice, nanoid } from "reduxjs/toolkit"; //createSlice is the method and nano id will the mark the components
+import { createSlice,nanoid } from "@reduxjs/toolkit" //createSlice is the method and nano id will the mark the components
 
 const initialState = { //yhi state hai aur uiske andar ke value ko hi niche wale function me add modify etc sab kar rhe hai
     todos: [{id: 1, text: "Hello-World"}]
