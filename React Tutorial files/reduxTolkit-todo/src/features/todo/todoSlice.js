@@ -7,7 +7,7 @@ const initialState = { //yhi state hai aur uiske andar ke value ko hi niche wale
 }
 
 function sayHello(){
-    console.log("Hellow")
+    console.log("Hello")
 }
 export const todoSlice = createSlice({ //create slice ek reducer bnane ka method hai
     name: "todo",
