@@ -248,3 +248,131 @@ A loader in React.js is typically used to indicate that some asynchronous operat
 19. We crreated a path route for the method in the main.jsx file and we are done
 
 ### Most important thing: Everything we have done in main.jsx to provide routes is only possible because we have made a file called Layout.jsx in src, because of that we have imported "Outlet" from react-router due to which we were able to create routes in main.jsx and that outlet helped us make layout of the page and in that format we passed the route first the layout then home the other componemts. Everything you pass as a route should be in order of the DOM. FOr eg if you have localhos:3000/About/Arnav, so the route will be passed in the same order 
+
+
+### API CONTEXT WE HAVE NOT WRITTEN
+
+*** 13. REDUX TOOLKIT***
+1. IMPORT REDUX configureStore(): We create a folder to import "Store" from redux and imported it in App.js
+2. created a folder called features in which we have defined multiple reducers
+3. createSlice() is a function from Redux Toolkit that simplifies writing Redux logic by reducing boilerplate code. It helps you: 1. Define the initial state 2. Create reducers and action creators 3.Automatically generate action types
+
+    -- Defined initialstate 
+    --Used : todoSlice
+    -- **name property**: //name property is by default the property of createSlice();
+    --Refrenced the initialstate inside the reducer //kuch log initialstae andar hi define krte h but best pactice yahi h initialstate bahar define kiya jaye aur usko reference andar kiya jaye
+
+  
+
+   ## Properties of createSlice()
+ The `createSlice()` function in Redux Toolkit takes a **configuration object** with a few important properties. Here are the **main properties** you can (or should) pass into it:
+
+---
+
+### 🔑 1. `name` (string)
+- A unique name for the slice.
+- Used as a prefix for the generated action types.
+
+**Example:**
+```js
+name: 'counter'
+```
+
+---
+
+### 🔑 2. `initialState` (object or primitive)
+- The initial state of this slice of the store.
+- Can be any data type (object, array, number, etc.)
+
+**Example:**
+```js
+initialState: {
+  value: 0
+}
+```
+
+---
+
+### 🔑 3. `reducers` (object)
+- An object where each key is a reducer function (like a case in a switch).
+- Each reducer receives the `state` and `action` as arguments.
+- You can safely "mutate" the state thanks to Immer.
+
+**Example:**
+```js
+reducers: {
+  increment(state) {
+    state.value += 1;
+  },
+  decrement(state) {
+    state.value -= 1;
+  }
+}
+```
+
+---
+
+### 🧩 4. `extraReducers` (object or callback function)
+- For handling **actions defined outside** the slice, like those from async thunks or other slices.
+- Can be:
+  - An object with action types as keys, or
+  - A builder callback (recommended)
+
+**Example (builder callback):**
+```js
+extraReducers: (builder) => {
+  builder
+    .addCase(fetchData.fulfilled, (state, action) => {
+      state.data = action.payload;
+    });
+}
+```
+
+---
+
+### Summary Table:
+
+| Property       | Type     | Required | Description |
+|----------------|----------|----------|-------------|
+| `name`         | `string` | ✅ Yes   | Unique slice name |
+| `initialState` | `any`    | ✅ Yes   | Initial state value |
+| `reducers`     | `object` | ✅ Yes   | Reducer functions for this slice |
+| `extraReducers`| `object` / function | ❌ Optional | For handling external actions (like async thunks) |
+
+---
+
+Want a visual diagram or a working example project?
+
+
+
+4. Create reducer: createSlice ka paroperty h **reducers:{}** but iske andar aata kya hai? Iske andar aata h properties aur functions
+
+reducers:{ //aise hi reducers likhte hai
+        addTodo: (state, action) => { //ye function hi add krega payload ko
+            const todo = {
+                id: nanoid(),
+               text: action.payload
+                }
+                state.todos.push(todo)
+        }, //remember this syntax state: gives access to present state,  action: value that will be given to modify state
+
+5. We create the functionality to add todo inside the reducer, we got to know how to use **addTodo: (state,action)** pushed the todo after that using **state.todos.prush(todo)**
+
+6. Same like we created addTodo we created removeTodo and then exported it like ths export const {addTodo, removeTodo} = todoSlice.actions //ye export components me kaam  ayega
+7. We export it like todoSlice.reducer also this is because of the store because store wants it as store will only accept only defined reducers becuase it's a closed state //ye export store me kaam aayega isliye dono type se export karna zaruri hai 
+
+*** yaha tak jo bhi hua wo store ke liye hua aur ab aage humlog useSelector aur useDispatcher padhenge ***
+
+--------- 
+
+8.Ab hum components bnayenge 1. Addtodo() ka components bnayenge: logic-> todo ko add karna h ye hoga jab hum useDispatch() ka use karenge 
+9. addTodoHandler : form on submit create krke uska upar me function define krna h 
+10. Important useDispatch reducers ke through store me add karna hai to humlog useDispatch() pass kar rhe h
+11. lekin use dipach me todo function khud se nahi aajaega to isliye humne todoSlice me addTodo, removeTodo alag alag add kiya h taki unko alag alag call krke use kare
+//IMP
+12. dispatch ke andar hi addTodo call karna parta h aur uske andar hi reducer hi call krna padta h
+
+**useDispatch** ka kaam hogya aage iske **useSelector** dekhenge
+
+13. Ab hum Todos.jsx me kaam karenge aur isme hume todo ki list karna hai jo humne AddTodo ke inital state me object bnakr dala h to uspe loop lagane se ho jaega but values kaha se milengi? **STORE** se
+14. Todo list krne ke liye to **useSelector** ka use kar lenge lekin agar hume koi bhi todo ko delete karna hai to hum kaise karenge ? Hume us todo ko remove karne ke liye store se access lena hoga aur vo kaise hoga? Vo *useDispatcher* ka use karke hoga isliye hum *useDispatcher ka use karenge* Todo.jsx me bhi
